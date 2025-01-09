@@ -27,7 +27,7 @@ export const HeaderComponent = () => {
                                 </NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="/books">
+                                <NavLink className="nav-link" to="/posts">
                                     Lista dei post
                                 </NavLink>
                             </li>
