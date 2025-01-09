@@ -5,10 +5,10 @@ export default function CardComponent({ data, onDeleteBook }) {
     // }
     return (
         <div className="card">
-            <img src={data.thumbnail} className="card-img-top" alt="immagine-libro" />
+            <img src={data.image} className="card-img-top" alt="immagine-post" />
             <div className="card-body">
                 <h5 className="card-title">{data.title}</h5>
-                <p className="card-text">{data.description.substring(0, 60) + "..."}</p>
+                <p className="card-text">{data.content.substring(0, 60) + "..."}</p>
                 <a href="#" className="btn btn-primary" onClick={onDeleteBook}>
                     Cancella
                 </a>

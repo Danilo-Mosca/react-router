@@ -3,7 +3,7 @@ import axios from "axios";
 import CardComponent from "../components/CardComponent";
 
 const apiUrl = import.meta.env.VITE_API_URL;
-const bookEndPoint = "/books";
+const bookEndPoint = "/posts";
 
 export const MainPage = () => {
     const [books, setBooks] = useState([]);
@@ -14,6 +14,8 @@ export const MainPage = () => {
     function getData() {
         axios.get(`${apiUrl}${bookEndPoint}`)
             .then((res) => {
+                console.log(res.data);
+                
                 setBooks(res.data.results);
             })
             .catch((err) => {
