@@ -4,7 +4,7 @@ import style from "./card.module.css";
 import { Link } from "react-router-dom";
 
 /* Funzione che crea le Cards */
-export default function CardComponent({ data, onDelete }) {
+export default function CardSingleComponent({ data, onDelete }) {
     // function canc(e) {
     //   e.preventDefault();
     //   onDeleteBook(data.id);
@@ -25,17 +25,12 @@ export default function CardComponent({ data, onDelete }) {
 
             <div className="card-body">
                 <h5 className="card-title">{title}</h5>
-                {/* substring(0,60) mostra i caratteri dallo zero al sessantesimo, e poi lo concateno con i tre puntini */}
-                <p className="card-text">{content.substring(0, 60) + "..."}</p>
+                <p className="card-text">{content}</p>
                 <p>Categoria:{category === '' ? "Nessuna categoria selezionata" : category}</p>
                 <p className=" card-text">
                     {published ? <span className={`${style["published-text"]}`}>Pubblicato</span> : <span className={`${style["not-published-text"]}`}>Non pubblicato</span>}
                 </p>
-                <p>
-                    {/* Stampo a schermo il link per vedere i dettagli sul post selezionato tramite id */}
-                    <Link to={`/posts/${id}`}>Vedi dettagli</Link>
-                </p>
-                <a href="#" className={`btn btn-primary ${style.btncustom}`} onClick={onDelete}>
+                <a href="#" className="btn btn-primary" onClick={onDelete}>
                     Cancella
                 </a>
             </div>

@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";      // importo l'hook params che serve a estrarre i parametri dinamici dall'URL 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import CardComponent from "../components/CardComponent";
+import CardSingleComponent from "../components/CardSingleComponent";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -29,7 +29,7 @@ export default function PostPage() {
             <h1>Sono il post con id: {id}</h1>
             {/* Se post non è null, cioè esiste, allora ritorno l'immagine e la descrizione della card: */}
             {post && (
-                <CardComponent data={post} />
+                <CardSingleComponent data={post} />
             )}
 
         </section>

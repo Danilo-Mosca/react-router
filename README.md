@@ -60,3 +60,21 @@ Bonus
 - Gestire la classe active
 -aggiungere una rotta con id dinamico e recuperare dal componente l'id del post
 ```
+
+```bash
+Esercizio del 10/01/2024: React Blog Pages (2)
+repo: react-router  (stessa di ieri)
+Consegna
+Completiamo il nostro routing con l’aggiunta delle pagine di dettaglio!
+Creiamo in header la barra di navigazione
+Facciamo quindi in modo di raggiungere la pagina di dettaglio del singolo post e la pagina per creare un nuovo post
+Nella nostra app deve essere possibile
+Visualizzare la lista dei post
+Vedere il singolo post
+Cancellare il singolo post
+Creare un nuovo post
+Bonus :razzo:
+Proviamo a inserire nella pagina di creazione una navigazione programmatica che ci consenta di andare al post appena salvato o  alla pagina con la lista dei posts
+Inseriamo nelle rotte una fallbackroute (404 notfound) con componente dedicato
+Inseriamo un componente loader che appaia al caricamento dei post o al salvataggio di un post
+```
