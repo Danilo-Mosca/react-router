@@ -1,6 +1,29 @@
 import { NavLink } from "react-router-dom";
 
+const navmenu = [
+    { path: "/", label: "Home" },
+    { path: "/posts", label: "Lista dei post" },
+    { path: "/chi-siamo", label: "Chi siamo" },
+    { path: "/contact", label: "Contatti" },
+];
+
 export const HeaderComponent = () => {
+    function drawMenu() {
+        return navmenu.map((item) => (
+            <li className="nav-item" key={item.path}>
+                <NavLink
+                    className="nav-link"
+                    to={item.path}
+                    style={({ isActive }) => ({
+                        color: isActive ? "red" : "black",
+                    })}
+                >
+                    {item.label}
+                </NavLink>
+            </li>
+        ));
+    }
+
     return (
         <header>
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -20,28 +43,8 @@ export const HeaderComponent = () => {
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNav">
-                        <ul className="navbar-nav">
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/">
-                                    Home
-                                </NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/posts">
-                                    Lista dei post
-                                </NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/chi-siamo">
-                                    Chi siamo
-                                </NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/contact">
-                                    Contact
-                                </NavLink>
-                            </li>
-                        </ul>
+                        {/* richiamo subito la funzione drawMenu, non per riferimento, quindi va tra parentesi tonde: drawMenu() */}
+                        <ul className="navbar-nav">{drawMenu()}</ul>
                     </div>
                 </div>
             </nav>
