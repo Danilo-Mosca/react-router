@@ -8,6 +8,8 @@ const navmenu = [
 ];
 
 export const HeaderComponent = () => {
+    
+    // Funione che disegna la barra del menu nell'header
     function drawMenu() {
         return navmenu.map((item) => (
             <li className="nav-item" key={item.path}>
@@ -29,7 +31,7 @@ export const HeaderComponent = () => {
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
                 <div className="container-fluid">
                     <NavLink className="navbar-brand" to="/">
-                        <img src="../src/assets/react.svg" alt="Logo React" />
+                        <img src="../src/assets/homepage.svg" alt="Logo React" className="logo-header" />
                     </NavLink>
                     <button
                         className="navbar-toggler"

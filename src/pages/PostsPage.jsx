@@ -2,36 +2,24 @@ import { useState, useEffect } from "react";    // Importo gli hook useState e u
 import { Link } from "react-router-dom";    // Importo l'hook Link
 import axios from "axios";
 import CardComponent from "../components/CardComponent";
-import Loader from "../components/Loader";
+import Loader from "../components/Loader";  // Importo il componente Loader che simula il caricamento della pagina
 
 //Api url e endpoint per axios
 const apiUrl = import.meta.env.VITE_API_URL;
 const postEndPoint = "/posts";
-
-// // Variabile usata per inizializzare lo useState post e successivamente per svuotare i campi del form
-// const initialPost = {
-//     id: "",
-//     title: "",
-//     image: "https://picsum.photos/640/480",
-//     content: "",
-//     category: "",
-//     tags: ["storia", "arte", "sport", "attualità"],
-//     published: false,
-// };
 
 // // Costante contenente i valori da passare alla <select> del form
 // const categoriesAvaible = ["news", "informatica", "musica", "cucina"];
 
 
 
-export const MainPage = () => {
-    // Variabile di stato dei post, che conterrà l'oggetto dei post ottenuto dalla chiamata axios
+export const PostsPage = () => {
+    // Variabile di stato dei post, che conterrà l'oggetto con la lista dei post ottenuto dalla chiamata axios
     const [posts, setPosts] = useState([]);
-    // Variabile di stato per l'input tipe search
+    // Variabile di stato per l'input type search
     const [search, setSearch] = useState("");
-
-
-    const [isLoading, setIsLoading] = useState(false);  // variabile di stato per il Loader
+    // variabile di stato per il Loader
+    const [isLoading, setIsLoading] = useState(false);
 
 
 
@@ -78,11 +66,10 @@ export const MainPage = () => {
                 console.log(res);
                 console.log(res.data);
                 getData(search);
-                // USO LA FUNZIONE getData() AL POSTO DELL'ISTRUZIONE DI SEGUITO (setPosts(posts.filter((post) => post.id !== id));
-                // PERCHE' IN CASO DI UTENTI MULTIPLI CONNESSI, RICHIAMARE L'ID COSI' POTREBBE DARE PROBLEMMI DI CONCORRENZA, 
-                // SE DUE O PIU' UTENTI CANCELLASSERO L'ELEMENTO CON QUELL'ID IN CONTEMPORANEA
-
-                //setPosts(posts.filter((post) => post.id !== id));
+                // USO LA FUNZIONE getData() AL POSTO DELL'ISTRUZIONE DI SEGUITO: 
+                //setPosts(posts.filter((post) => post.id !== id);
+                // PERCHE' IN CASO DI UTENTI MULTIPLI CONNESSI, RICHIAMARE E CANCELLARE L'ELEMENTO CON QUELL'ID COSI' POTREBBE DARE PROBLEMI DI
+                // "CONCORRENZA", SE DUE O PIU' UTENTI CANCELLASSERO L'ELEMENTO CON QUELL'ID IN CONTEMPORANEA
             })
             .catch((error) => {
                 console.log(error);
@@ -93,6 +80,7 @@ export const MainPage = () => {
 
     // Funzione richiamata ogni volta che cambia il contenuto della barra di ricerca e che setta la variabile di stato search con il valore in essa contenuto
     function handleSearch(event) {
+        console.log("Evento della casella search: ", event.target.value);
         setSearch(event.target.value);
     }
 
@@ -125,14 +113,17 @@ export const MainPage = () => {
                     <div className="row gy-4">
                         {posts.length > 0 ?
                             posts.map((post) => (
-                                <div className="col-12 col-md-4 col-lg-3" key={post.id}>
-                                    <CardComponent
-                                        data={post}
-                                        onDelete={(e) => {
-                                            deleteItem(e, post.id);
-                                        }}
-                                    />
-                                </div>
+                                // Se la chiave published di post è falsa allora non lo visualizzo (visualizzo solo "")
+                                post.published === true ?
+                                    <div className="col-12 col-md-4 col-lg-3" key={post.id}>
+                                        <CardComponent
+                                            data={post}
+                                            onDelete={(e) => {
+                                                deleteItem(e, post.id);
+                                            }}
+                                        />
+                                    </div>
+                                    : ""
                             ))
                             : "Non ci sono post!"
                         }

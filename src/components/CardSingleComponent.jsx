@@ -11,7 +11,7 @@ export default function CardSingleComponent({ data, onDelete }) {
     // }
 
     // Destrutturo l'oggetto data
-    const { id, title, image = "https://picsum.photos/640/480", content, category, published } = data;
+    const { id, title, image = "https://picsum.photos/640/480", content, published, tags } = data;
 
     return (
         <div className={`${style.cards} card`}>
@@ -26,13 +26,11 @@ export default function CardSingleComponent({ data, onDelete }) {
             <div className="card-body">
                 <h5 className="card-title">{title}</h5>
                 <p className="card-text">{content}</p>
-                <p>Categoria:{category === '' ? "Nessuna categoria selezionata" : category}</p>
+                {/* Controllo se sono stati selezionati tag per il post, in caso contrario stampa "Nessuna tag selezionato" */}
+                <p className={`card-text ${style.colorTag}`}>Tag: {tags.length === 0 ? "Nessuna tag selezionato" : tags.join(", ")}</p>
                 <p className=" card-text">
                     {published ? <span className={`${style["published-text"]}`}>Pubblicato</span> : <span className={`${style["not-published-text"]}`}>Non pubblicato</span>}
                 </p>
-                <a href="#" className="btn btn-primary" onClick={onDelete}>
-                    Cancella
-                </a>
             </div>
         </div>
     );
