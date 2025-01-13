@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";      // importo l'hook params che serve a estrarre i parametri dinamici dall'URL 
+import { useNavigate, useParams } from "react-router-dom";      // importo l'hook params che serve a estrarre i parametri dinamici dall'URL 
 import { useState, useEffect } from "react";
 import axios from "axios";
 import CardSingleComponent from "../components/CardSingleComponent";
@@ -14,6 +14,10 @@ export default function PostPage() {
     // Con l'hook useEffect richiamo la funzione getData solo alla modifica dell'id dell'hook useParams
     useEffect(getData, [id]);
 
+    // Mi creo la costante navigate e le assegno l'hook di useNavigate per permettere la reindirizzazione dell'utente alla pagina da noi desiderata
+    // nello speficio reindirizzo l'utente se questo inserisce un url con un dettaglio ad un post con id inesistente, come ad esempio:
+    const navigate = useNavigate();
+
     function getData() {
         axios.get(apiUrl + "/posts/" + id)
             .then((res) => {
@@ -21,6 +25,10 @@ export default function PostPage() {
                 setPost(res.data.item);
             }).catch((error) => {
                 console.log(error);
+                // Se inserisco un id non esistente reindirizzo l'utente alla rotta "/error" che non esiste, 
+                // quindi automaticamente verrò reindirizzato alla pagina NotFoundPage.jsx
+                // In questo modo gestisco ed evito la visualizzazione della pagina dei dettagli per un post con id inesistente:
+                navigate("/error")
             }).finally(() => {
                 console.log("Finito");
             });

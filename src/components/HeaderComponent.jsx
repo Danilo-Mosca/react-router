@@ -16,6 +16,13 @@ export const HeaderComponent = () => {
                 <NavLink
                     className="nav-link"
                     to={item.path}
+                    end         // con l'attributo "end" specifico che il menu di navigazione "Lista dei post" deve apparire rosso e quindi essere
+                                // attivo (grazie alla property isActive) solo quando io sono effettivamente nella Lista dei post e quindi solo quando
+                                // l'url è:
+                                //  http://localhost:5173/posts 
+                                // non anche quando clicco sul pulsante "Aggiungi un nuovo post" oppure quando sono sulla pagina 
+                                // dettaglio del singolo post. Se infatti tolgo l'attributo end il testo della <li> del menu "Lista dei post"
+                                // sarà rosso anche per le pagine sopra citate.
                     style={({ isActive }) => ({
                         color: isActive ? "red" : "black",
                     })}
