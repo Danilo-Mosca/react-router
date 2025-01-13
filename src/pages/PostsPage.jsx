@@ -42,7 +42,13 @@ export const PostsPage = () => {
         };
         setIsLoading(true);     // Al caricamento dei post setto la variabile di stato isLoading a true, così da permettere la visualizzazione del componente <Loader />
 
-        axios.get(`${apiUrl}${postEndPoint}`, `/${options}`)
+        /* Nel caso abbia inserito qualcosa nella casella di ricerca allora options non sarà null ma avrà il valore di ciò che ho inserito
+           nella casella di input type="search" e quindi il parametro sarà passato ad axios. Il parametro viene passato da axios in QUERY STRING, quindi
+           se ad esempio inserissi "Roma" sarà passata la query string "?search=roma": http://localhost:3000/posts?search=roma
+           se inserissi: "Post Amsterdam" (con lo spazio) 
+           sarà passata la Query string parameters "search=post+amsterdam": http://localhost:3000/posts?search=post+amsterdam
+        */
+        axios.get(`${apiUrl}${postEndPoint}`, options)
             .then((res) => {
                 console.log(res.data);
                 setPosts(res.data.results);
